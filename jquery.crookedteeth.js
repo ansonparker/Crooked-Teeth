@@ -134,9 +134,10 @@
       	}
       }
      
+     try {
+     
      var cvs = $("<canvas width='"+(fwidth)+"' height='"+(fheight)+"'></canvas>")
      var ctx = cvs.get(0).getContext('2d')
-     
      
      var bgi = $this.css("background-image")
      if(bgi=='none') {
@@ -160,7 +161,7 @@
 	     	ctx.fill()
 	     }
 	     
-	     var bi = cvs.get(0).toDataURL("image/png");
+	     var bi = cvs.get(0).toDataURL("image/png")
 	     if(has_border)
 	     {
 	     	$this.css("border-width",0)
@@ -181,12 +182,16 @@
      		ctx.closePath()
      		ctx.fill()
      		try {
-     			var bi = cvs.get(0).toDataURL("image/png");
+     			var bi = cvs.get(0).toDataURL("image/png")
      			$this.css({"background-color":"transparent","background-image":"url('"+bi+"')"})
      		} catch(err) { alert(err.message) }
      	
      	}
      	img.src=bgi.substring(4,bgi.length - 1)   
+     }
+     
+     } catch (err) {
+     	// this is where IE users end up :(
      }
 
      function rndInt(max) {
