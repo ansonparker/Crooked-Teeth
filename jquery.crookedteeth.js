@@ -2,18 +2,12 @@
 
   $.fn.crookedTeeth = function(options) {
 
-  	// modes: when border and padding found border is the wobble radius
-  	//        when padding only found, padding is the wobble radius
-  	//        when padding and wobble parameter found, parameter is the wobble radius
+  	// modes: when border and padding found border is the distortion amount
+  	//        when padding only found, padding is the distortion amount
+  	//        when padding and amount parameter found, amount is the distortion amount
   	//
   	// when no border:
-  	// if background-image then we clip that
-  	// otherwise use background color
-  	
-  	// to-do: allow for non-random assignation
-  	//        allow for other shapes (perhaps multiple random points per side) as well as blobs and curves
-  	//        allow it to run multiple times (preserve initial state)
-  	//        cross-browser support testing
+  	// if background-image then we clip that otherwise use background color
   
 	var settings = $.extend( {
 	      'xwobble' : true,
@@ -52,10 +46,10 @@
 	      	if(typeof settings.amount == 'number') {
 	      		vry.l=vry.t=vry.r=vry.b=settings.amount
 	      	} else if(typeof settings.amount == 'string') {
-	      	
+
 	      		var wobs = settings.amount.split(" ")
 	      		switch(wobs.length) {
-	      		
+
 	      			case 1:
 	      				vry.l=vry.t=vry.r=vry.b=parseInt(wobs[0],10)
 	      				break
@@ -134,9 +128,10 @@
       	}
       }
      
+     try {
+     
      var cvs = $("<canvas width='"+(fwidth)+"' height='"+(fheight)+"'></canvas>")
      var ctx = cvs.get(0).getContext('2d')
-     
      
      var bgi = $this.css("background-image")
      if(bgi=='none') {
@@ -149,7 +144,7 @@
 	     ctx.lineTo(bl.x,bl.y)
 	     ctx.closePath()
 	     ctx.fill()
-	     
+
 	     //draw bg if different from border
 	     if(has_border && bgc!=bdc)
 	     {
@@ -159,8 +154,8 @@
 	     	ctx.closePath()
 	     	ctx.fill()
 	     }
-	     
-	     var bi = cvs.get(0).toDataURL("image/png");
+
+	     var bi = cvs.get(0).toDataURL("image/png")
 	     if(has_border)
 	     {
 	     	$this.css("border-width",0)
@@ -181,12 +176,16 @@
      		ctx.closePath()
      		ctx.fill()
      		try {
-     			var bi = cvs.get(0).toDataURL("image/png");
+     			var bi = cvs.get(0).toDataURL("image/png")
      			$this.css({"background-color":"transparent","background-image":"url('"+bi+"')"})
      		} catch(err) { alert(err.message) }
      	
      	}
      	img.src=bgi.substring(4,bgi.length - 1)   
+     }
+     
+     } catch (err) {
+     	// this is where IE users end up :(
      }
 
      function rndInt(max) {
