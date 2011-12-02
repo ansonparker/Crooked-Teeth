@@ -1,10 +1,11 @@
 (function( $ ){
 
-  $.fn.wobbler = function(options) {
+  $.fn.crookedTeeth = function(options) {
 
   	// modes: when border and padding found border is the wobble radius
   	//        when padding only found, padding is the wobble radius
   	//        when padding and wobble parameter found, parameter is the wobble radius
+  	//
   	// when no border:
   	// if background-image then we clip that
   	// otherwise use background color
@@ -140,7 +141,7 @@
      var bgi = $this.css("background-image")
      if(bgi=='none') {
      
-	     ctx.fillStyle=bdc
+	     ctx.fillStyle = has_border ? bdc : bgc
 	     ctx.beginPath()
 	     ctx.moveTo(tl.x,tl.y)
 	     ctx.lineTo(tr.x,tr.y)
@@ -159,7 +160,7 @@
 	     	ctx.fill()
 	     }
 	     
-	     var bi = getBase64Image(ctx.getImageData(0,0,fwidth,fheight))
+	     var bi = cvs.get(0).toDataURL("image/png");
 	     if(has_border)
 	     {
 	     	$this.css("border-width",0)
@@ -180,7 +181,7 @@
      		ctx.closePath()
      		ctx.fill()
      		try {
-     			var bi = getBase64Image(ctx.getImageData(0,0,fwidth,fheight))
+     			var bi = cvs.get(0).toDataURL("image/png");
      			$this.css({"background-color":"transparent","background-image":"url('"+bi+"')"})
      		} catch(err) { alert(err.message) }
      	
@@ -191,15 +192,6 @@
      function rndInt(max) {
      	return Math.round(Math.random()*max)
      }
-     function getBase64Image(imgd) {
-          var canvas = document.createElement("canvas")
-          canvas.width = imgd.width
-          canvas.height = imgd.height
-          var ctx = canvas.getContext("2d")
-          ctx.putImageData(imgd, 0, 0)
-          var dataURL = canvas.toDataURL("image/png")
-      	  return dataURL
-      }
 
     })
 
