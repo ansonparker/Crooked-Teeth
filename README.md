@@ -1,7 +1,7 @@
 Crooked Teeth
 =============
 
-Crooked Teeth is a jQuery plug-in you can use to make page elements crooked. Jump to the [http://ansonparker.github.com/Crooked-Teeth](example site) to see Crooked Teeth in action.
+Crooked Teeth is a jQuery plug-in you can use to make page elements crooked. Jump to the [example site](http://ansonparker.github.com/Crooked-Teeth) to see Crooked Teeth in action.
 
 _CAVEAT EMPTOR_ Crooked Teeth uses canvas for drawing so IE is not currently supported. But it should just fail silently.
 
@@ -34,7 +34,7 @@ You can pass Crooked Teeth a number of parameters to control its output:
 Examples
 --------
 
-See [http://ansonparker.github.com/Crooked-Teeth] for a demo of Crooked Teeth in action
+[View the demo site](http://ansonparker.github.com/Crooked-Teeth) for examples of Crooked Teeth in action.
 
 To-Do
 -----
