@@ -2,18 +2,12 @@
 
   $.fn.crookedTeeth = function(options) {
 
-  	// modes: when border and padding found border is the wobble radius
-  	//        when padding only found, padding is the wobble radius
-  	//        when padding and wobble parameter found, parameter is the wobble radius
+  	// modes: when border and padding found border is the distortion amount
+  	//        when padding only found, padding is the distortion amount
+  	//        when padding and amount parameter found, amount is the distortion amount
   	//
   	// when no border:
-  	// if background-image then we clip that
-  	// otherwise use background color
-  	
-  	// to-do: allow for non-random assignation
-  	//        allow for other shapes (perhaps multiple random points per side) as well as blobs and curves
-  	//        allow it to run multiple times (preserve initial state)
-  	//        cross-browser support testing
+  	// if background-image then we clip that otherwise use background color
   
 	var settings = $.extend( {
 	      'xwobble' : true,
