@@ -7,18 +7,62 @@
   	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   	<![endif]--> 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script src="jquery.crookedteeth.js"></script>
 	<script>
 
 	$("document").ready( function() {
 
-		// code
-
+		$(".egafter,.eg4a li").crookedTeeth();
+		$(".eg25after").crookedTeeth({amount:5});
+		$(".eg4b li").crookedTeeth({connect:"vertical"});
+		$(".eg4c li").crookedTeeth({connect:"vertical",xsymmetry:true});
 	});
+	
 	</script>
 	<style>
 		body
 		{
-			background-color:#fafaed;
+			background-color:#fffcf8;
+			font-family: Helvetica Neue, Helvetica, Arial, Sans-serif;
+			font-size: 13px;
+			color: #260036;
+			padding-bottom: 128px;
+		}
+		
+		p
+		{
+			line-height: 20px;
+		}
+		
+		p.note
+		{
+			font-size: 12px;
+			margin-bottom: 20px;
+		}
+		
+		h2
+		{
+			font-size: 18px;
+			font-weight: normal;
+			background-color: #fff;
+			padding: 4px 8px;
+			border: 1px solid #f5f5ef;
+			display: inline-block;
+			margin-left: -9px;
+		}
+		
+		h3
+		{
+			font-size: 11px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			
+		}
+		
+		#main
+		{
+			width: 600px;
+			margin: 0 auto;
 		}
 
 		img#header
@@ -26,12 +70,273 @@
 			display:block;
 			margin: 32px auto;
 		}
+		
+		table
+		{
+			border-collapse: collapse;
+		}
+		
+		th
+		{
+			text-align: left;
+			font-weight: normal;
+			font-size: 10px;
+			text-transform: uppercase;
+			color: #777;
+			padding: 0 10px 10px 0;
+		}
+		
+		td
+		{
+			padding: 0 10px 10px 0;
+			vertical-align: top;
+			font-size: 12px;
+		}
+		
+		.egcontainer
+		{
+			padding: 0;
+			margin: 0 0 40px 0;
+			width: 100%;
+			overflow: hidden;
+		}
+		
+		.egcontainer p
+		{
+			font-size: 12px;
+			line-height: 18px;
+		}
+		
+		.egcontainer label
+		{
+			font-size: 10px;
+			text-align: center;
+			display: block;
+			text-transform: uppercase;
+			font-weight: bold;
+			margin-top: 10px;
+		}
+		.before,.after
+		{
+			width: 50%;
+			float: left;
+			margin-bottom: 10px;
+		}
+		
+		.eg1,.eg15
+		{
+			background-color: #00aef0;
+			margin: 20px auto 0 auto;
+			width: 180px;
+			border: 10px solid #00aef0;
+			height: 130px;
+		}
+		
+		.eg15
+		{
+			border-color: #0076a3;
+		}
+		
+		.eg2,.eg25
+		{
+			background-color: #00aef0;
+			margin: 20px auto 0 auto;
+			width: 160px;
+			padding: 20px;
+			height: 110px;
+		}
+		
+		.eg3
+		{
+			margin: 20px auto 0 auto;
+			width: 180px;
+			padding: 10px;
+			height: 130px;
+			background-image: url(seamless-brick.jpg);
+		}
+		
+		.eg4,.eg4a,.eg4,.eg4b,.eg4c
+		{
+			margin: 20px auto 0 auto;
+			width: 200px;
+			list-style-type: none;
+		}
+		
+		.eg4 li,.eg4a li,.eg4b li,.eg4c li
+		{
+			background-color: #00aef0;
+			padding: 5px 10px;
+			border: 10px solid #00aef0;
+			display: block;
+		}
+		
+		.eg4 li.alt,.eg4a li.alt,.eg4b li.alt,.eg4c li.alt
+		{
+			background-color: #0076a3;
+			border-color: #0076a3;
+		}
+
 
 	</style>
 </head>
 <body>
 
-<img src="images/crookedteeth.png" id="header" />
+<div id="main">
+
+<img src="images/crookedteeth.png" alt="You got a perdy mouth" title="You got a perdy mouth" id="header" />
+
+<h2>En-crooked-ize yourself!</h2>
+<p><strong>Crooked Teeth</strong> is a jQuery plug-in you can use to make boxes elements crooked. It supports elements containing either background colors or background images.</p>
+<p>Essentially, give an element a border and apply Crooked Teeth to it and the object will be made randomly crooked by the border's width amount on each side.</p> 
+<p>For downloads, source code and more, see the <a href="http://github.com/ansonparker/Crooked-Teeth">Crooked Teeth github repo</a>.</p>
+
+<h2>Usage</h2>
+<p>Just include the <code>jquery.crookedteeth.js</code> javascript file (along with jQuery) and then call the function with something like <code>$(".myelements").crookedTeeth()</code>. Simple!	</p>
+
+<h2>Parameters</h2>
+
+<p>You can pass the <code>crookedTeeth()</code> method an object containing any of the following attributes:</p>
+
+<table>
+<tr><th>setting</th><th>default</th><th>allowed values</th><th>description</th></tr>
+<tr><td><code>amount</code></td><td>-</td><td>An integer or a css-style width shorthand string</td><td>The amount to distort the element by.</td></tr>
+<tr><td><code>xwobble</code></td><td><code>true</code></td><td>Boolean</td><td>If false, no x-axis component to the distortion will be added.</td></tr>
+<tr><td><code>ywobble</code></td><td><code>true</code></td><td>Boolean</td><td>If false, no y-axis component to the distortion will be added.</td></tr>
+<tr><td><code>xsymmetry</code></td><td><code>false</code></td><td>Boolean</td><td>If true, the top and bottom x-distortion will be the same on both sides.</td></tr>
+<tr><td><code>ysymmetry</code></td><td><code>false</code></td><td>Boolean</td><td>If true, the left-side and right-side y-distortion will be the same on both sides</td></tr>
+<tr><td><code>connect</code></td><td>-</td><td>"vertical" or "horizontal"</td><td>If set it will cause siblings to be connected as specified (see example below)</td></tr>
+</table>
+
+<h2>Examples</h2>
+
+<p class="note"><strong>Note:</strong> Each time you reload the page the examples will redraw differently. This might come in handy if an example's distortion isn't particularly obvious.</p>
+
+<h3>#1 Border Control</h3>
+<div class="egcontainer">
+<div class="before">
+<div class="eg1"></div><label>Before</label>
+</div>
+<div class="after">
+<div class="eg1 egafter"></div><label>After</label>
+</div>
+<p>Above with have a <code>&lt;DIV&gt;</code> with a 10 pixel border. Call <code>crookedTeeth()</code> with no arguments and it will use the border width to distort the shape. You
+can see what's going on more clearly when we make the border color different from the background:</p>
+<div class="before">
+<div class="eg15"></div><label>Before</label>
+</div>
+<div class="after">
+<div class="eg15 egafter"></div><label>After</label>
+</div>
+</div>
+
+<h3>#2 Padding-based Distortion</h3>
+<div class="egcontainer">
+<div class="before">
+<div class="eg2"></div><label>Before</label>
+</div>
+<div class="after">
+<div class="eg2 egafter"></div><label>After</label>
+</div>
+<p>This time we'll remove the border and just use padding of <code>20px</code> all around. Call <code>crookedTeeth()</code> with no arguments and it will use that padding as the
+distortion amount. Alternately, pass <code>{amount:5}</code> to the function to limit the distortion to just 5 pixels each side:</p>
+<div class="before">
+<div class="eg25"></div><label>Before</label>
+</div>
+<div class="after">
+<div class="eg25 eg25after"></div><label>After</label>
+</div>
+<p>Using a border is a nice way to avoid having to call <code>crookedTeeth()</code> with arguments. Although this is not always practical, such as when you're using a background image.</p>
+</div>
+
+<h3>#3 Background Images</h3>
+<div class="egcontainer">
+<div class="before">
+<div class="eg3"></div><label>Before</label>
+</div>
+<div class="after">
+<div class="eg3 egafter"></div><label>After</label>
+</div>
+<p>Here we have 10 pixels of padding, but we could fine-tune the crookedness by passing an <code>amount</code> parameter. When making elements
+with background-images crooked, you'll find you get a security exception if you load the page as a local html file. It will only work when the
+page is served by a webserver.</p>
+</div>
+
+<h3>#4 A series of elements</h3>
+<div class="egcontainer">
+<div class="before">
+<ul class="eg4">
+<li>List element A</li>
+<li class="alt">List element B</li>
+<li>List element C</li>
+<li class="alt">List element D</li>
+</ul>
+<label>Before</label>
+</div>
+<div class="after">
+<ul class="eg4a">
+<li>List element A</li>
+<li class="alt">List element B</li>
+<li>List element C</li>
+<li class="alt">List element D</li>
+</ul>
+<label>After</label>
+</div>
+<p>You might what to distort a group of adjacent elements, such as an unordered list. If we call <code>crookedTeeth()</code> with no arguments we'd get the above result. You might want
+to have the elements connected to each other, however. To do this pass the parameter <code>{connect:"vertical"}</code> and you'll get this:</p>
+<div class="before">
+<ul class="eg4">
+<li>List element A</li>
+<li class="alt">List element B</li>
+<li>List element C</li>
+<li class="alt">List element D</li>
+</ul>
+<label>Before</label>
+</div>
+<div class="after">
+<ul class="eg4b">
+<li>List element A</li>
+<li class="alt">List element B</li>
+<li>List element C</li>
+<li class="alt">List element D</li>
+</ul>
+<label>After</label>
+</div>
+<p>You might want your series of elements to look just slightly more orderly. You can apply symmetry to either axis with by passing a boolean attribute of either <code>{xsymmetry:true}</code> or <code>{ysymmetry:true}</code>. Passing the former will result in this:</p>
+<div class="before">
+<ul class="eg4">
+<li>List element A</li>
+<li class="alt">List element B</li>
+<li>List element C</li>
+<li class="alt">List element D</li>
+</ul>
+<label>Before</label>
+</div>
+<div class="after">
+<ul class="eg4c">
+<li>List element A</li>
+<li class="alt">List element B</li>
+<li>List element C</li>
+<li class="alt">List element D</li>
+</ul>
+<label>After</label>
+</div>
+<p>You might notice that the first and last elements of the list still have y-axis distortion. You can remove this if needed by passing the <code>{ywobble:0}</code> parameter.</p>
+</div>
+
+
+<h2>Download</h2>
+
+<p>If you missed the repository link above and are desperate for a download link, knock yourself out: <a href="https://github.com/ansonparker/Crooked-Teeth/zipball/master">Download CrookedTeeth.zip</a>.</p>
+
+<h2>Author</h2>
+
+<p>Crooked Teeth was written by Anson Parker. If you want to talk all things crooked, you can find me on Twitter as <a href="http://twitter.com/anson/">@anson</a></p>
+
+<h2>In the Wild</h2>
+
+<p>If you've used Crooked Teeth I'd love to hear about it. Send me a shout-out on Twitter with a URL and I'll add it here!</p>
+
+</div>
 
 </body>
 </html>
