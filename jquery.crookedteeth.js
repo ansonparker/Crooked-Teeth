@@ -29,13 +29,13 @@
       	r: parseInt($this.css("borderRightWidth"),10) || 0,
       	b: parseInt($this.css("borderBottomWidth"),10) || 0
       }
-      has_border= !( (vry.l|vry.t|vry.r|vry.b) == 0)
+      has_border=( (vry.l|vry.t|vry.r|vry.b) > 0)
       
       var pad = {
-      	l: parseInt($this.css("padding-left"),10),
-      	t: parseInt($this.css("padding-top"),10),
-      	r: parseInt($this.css("padding-right"),10),
-      	b: parseInt($this.css("padding-bottom"),10)
+      	l: parseInt($this.css("padding-left"),10) || 0,
+      	t: parseInt($this.css("padding-top"),10) || 0,
+      	r: parseInt($this.css("padding-right"),10) || 0,
+      	b: parseInt($this.css("padding-bottom"),10) || 0
       }
       
       if(!has_border) {
@@ -46,10 +46,10 @@
 	      	if(typeof settings.amount == 'number') {
 	      		vry.l=vry.t=vry.r=vry.b=settings.amount
 	      	} else if(typeof settings.amount == 'string') {
-
+	      	
 	      		var wobs = settings.amount.split(" ")
 	      		switch(wobs.length) {
-
+	      		
 	      			case 1:
 	      				vry.l=vry.t=vry.r=vry.b=parseInt(wobs[0],10)
 	      				break
@@ -128,6 +128,7 @@
       	}
       }
      
+     
      try {
      
      var cvs = $("<canvas width='"+(fwidth)+"' height='"+(fheight)+"'></canvas>")
@@ -144,7 +145,7 @@
 	     ctx.lineTo(bl.x,bl.y)
 	     ctx.closePath()
 	     ctx.fill()
-
+	     
 	     //draw bg if different from border
 	     if(has_border && bgc!=bdc)
 	     {
@@ -154,7 +155,7 @@
 	     	ctx.closePath()
 	     	ctx.fill()
 	     }
-
+	     
 	     var bi = cvs.get(0).toDataURL("image/png")
 	     if(has_border)
 	     {
@@ -178,14 +179,51 @@
      		try {
      			var bi = cvs.get(0).toDataURL("image/png")
      			$this.css({"background-color":"transparent","background-image":"url('"+bi+"')"})
-     		} catch(err) { alert(err.message) }
+     		} catch(err) {}
      	
      	}
      	img.src=bgi.substring(4,bgi.length - 1)   
      }
      
      } catch (err) {
-     	// this is where IE users end up :(
+     
+     	if(document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1")) {
+	     	var bgi = $this.css("background-image")
+	     	if(bgi=='none') {
+	     		
+	     		var bg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='"+fwidth+"' height='"+fheight+"'>"
+	     		    bg+= "<polygon points='"+tl.x+","+tl.y+","+tr.x+","+tr.y+","+br.x+","+br.y+","+bl.x+","+bl.y+"' style='fill:"+bgc+";stroke-width:0'/>"
+	     		    bg+= "</svg>"
+	
+				if(has_border)
+				{
+					$this.css("border-width",0)
+					$this.css("padding",(pad.t+vry.t)+"px "+(pad.r+vry.r)+"px "+(pad.b+vry.b)+"px "+(pad.l+vry.l)+"px ")
+				}
+				$this.css({"background-color":"transparent","background-image":"url(\""+bg+"\")"})  	
+	     		
+	     	} else {
+
+	     	    var img = new Image()
+	     	    img.onload = function() {
+	     	    	var tw = this.width
+	     	    	var th = this.height
+		     		var pattern = "<pattern id='bgtext' patternUnits='userSpaceOnUse' width='"+tw+"' height='"+th+"'><image xlink:href='"+bgi.substring(4,bgi.length - 1)+"' width='"+tw+"' height='"+th+"' /></pattern>"
+		     		var bg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='"+fwidth+"' height='"+fheight+"'>"
+		     			bg += pattern
+		     			bg+= "<polygon points='"+tl.x+","+tl.y+","+tr.x+","+tr.y+","+br.x+","+br.y+","+bl.x+","+bl.y+"' style='fill:url(#bgtext);stroke-width:0'/>"
+		     			bg+= "</svg>"
+		     			
+					if(has_border)
+					{
+						$this.css("border-width",0)
+						$this.css("padding",(pad.t+vry.t)+"px "+(pad.r+vry.r)+"px "+(pad.b+vry.b)+"px "+(pad.l+vry.l)+"px ")
+					}
+					$this.css({"background-color":"transparent","background-image":"url(\""+bg+"\")"})  
+				}
+				img.src=bgi.substring(4,bgi.length - 1)  
+	     	}
+	     }
      }
 
      function rndInt(max) {
