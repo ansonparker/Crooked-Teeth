@@ -182,7 +182,8 @@
      		} catch(err) {}
      	
      	}
-     	img.src=bgi.substring(4,bgi.length - 1)   
+     	var pdr = (bgi.substring(4,bgi.length - 1).charAt(0)=="h") ? 0 : 1
+     	img.src=bgi.substring(4+pdr,bgi.length - (1+pdr))
      }
      
      } catch (err) {
@@ -204,11 +205,11 @@
 	     		
 	     	} else {
 
-	     	    var img = new Image()
-	     	    img.onload = function() {
+	     	    var imgf = new Image()
+	     	    imgf.onload = function(f) {
 	     	    	var tw = this.width
 	     	    	var th = this.height
-		     		var pattern = "<pattern id='bgtext' patternUnits='userSpaceOnUse' width='"+tw+"' height='"+th+"'><image xlink:href='"+bgi.substring(4,bgi.length - 1)+"' width='"+tw+"' height='"+th+"' /></pattern>"
+		     		var pattern = "<pattern id='bgtext' patternUnits='userSpaceOnUse' width='"+tw+"' height='"+th+"'><image xlink:href='"+bgi.substring(5,bgi.length - 2)+"' width='"+tw+"' height='"+th+"' /></pattern>"
 		     		var bg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='"+fwidth+"' height='"+fheight+"'>"
 		     			bg += pattern
 		     			bg+= "<polygon points='"+tl.x+","+tl.y+","+tr.x+","+tr.y+","+br.x+","+br.y+","+bl.x+","+bl.y+"' style='fill:url(#bgtext);stroke-width:0'/>"
@@ -221,7 +222,8 @@
 					}
 					$this.css({"background-color":"transparent","background-image":"url(\""+bg+"\")"})  
 				}
-				img.src=bgi.substring(4,bgi.length - 1)  
+				var pdr = (bgi.substring(4,bgi.length - 1).charAt(0)=="h") ? 0 : 1
+				imgf.src=bgi.substring(4+pdr,bgi.length - (1+pdr))
 	     	}
 	     }
      }
