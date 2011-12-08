@@ -3,7 +3,7 @@ Crooked Teeth
 
 Crooked Teeth is a jQuery plug-in you can use to make page elements crooked. Jump to the [example site](http://ansonparker.github.com/Crooked-Teeth) to see Crooked Teeth in action.
 
-_CAVEAT EMPTOR_ Crooked Teeth uses canvas for drawing so IE is not currently supported. But it should just fail silently.
+Crooked Teeth will use either Canvas or SVG to render crooked borders, so all Webkit-based browsers, Firefox, Opera and IE 9+ are supported.
 
 Usage
 -----
@@ -43,4 +43,4 @@ To-Do
 * Optionally allow randomness to be repeatable with a seed value (for consistent appearance)
 * Allow for other shapes (perhaps multiple random points per side) as well as blobs and curves
 * Allow `crookedTeeth()` to run multiple times on an element with expected results (preserve initial element state)
-* Better cross-browser support
+* ~~Better cross-browser support~~ SVG now supported
